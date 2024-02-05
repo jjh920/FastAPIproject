@@ -1,5 +1,14 @@
 {% extends 'base.html' %}
 
+{% block style %}
+    <style>
+    form { width: 365px; margin: 100px auto; }
+    form div { margin-bottom: 5px;}
+    form label { font-weight: bold; width: 110px; text-align: right; }
+    form button:first-child { margin-left: 135px }
+    </style>
+{% endblock %}
+
 {% block main %}
 <main>
     <h2>회원가입</h2>
@@ -14,7 +23,7 @@
         </div>
         <div class="row">
             <div class="col-auto"><label for="repwd" class="col-form-label">비밀번호 확인</label></div>
-            <div class="col-auto"><input type="password" name="repwd" id="repwd" class="form-control"></div>
+            <div class="col-auto"><input type="text" name="repwd" id="repwd" class="form-control"></div>
         </div>
         <div class="row">
             <div class="col-auto"><label for="name" class="col-form-label">이름</label></div>

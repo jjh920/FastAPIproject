@@ -11,9 +11,11 @@
 
 {% block main %}
 <main>
-    <h2>회원가입 완료</h2>
+    <h2>회원가입 완료!!</h2>
             <div><button type="button" class="btn btn-primary" id="loginbtn">
             <i class="bi bi-check-all"></i>로그인</button></div>
+            <div><button type="button" class="btn btn-danger" id="loginbtn2">
+                <i class="bi bi-check-all"></i>홈으로</button></div>
 </main>
 {% endblock %}
 
@@ -22,6 +24,11 @@
     let loginbtn = document.querySelector('#loginbtn');
     loginbtn.addEventListener('click', () => {
         location.href = 'http://127.0.0.1:8000/login';
+    });
+
+    let loginbtn2 = document.querySelector('#loginbtn2');
+    loginbtn2.addEventListener('click', () => {
+        location.href = 'http://127.0.0.1:8000';
     });
 </script>
 {% endblock %}

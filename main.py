@@ -3,6 +3,7 @@ from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 
+from app.dbfactory import db_startup
 from app.routes.board import board_router
 from app.routes.member import member_router
 
@@ -16,6 +17,10 @@ app.mount('/static', StaticFiles(directory='views/static'), name='static')
 app.include_router(member_router)
 app.include_router(board_router, prefix='/board')
 
+# 서버시작시 디비 생성
+@app.on_event('startup')
+async def on_startup():
+    db_startup()
 
 @app.get("/", response_class=HTMLResponse)
 async def index(req: Request):

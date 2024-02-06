@@ -35,11 +35,47 @@
         </div>
         <div class="row">
             <div class="col-auto">
-                <button type="button" class="btn btn-primary">
+                <button type="button" class="btn btn-primary" id="joinbtn">
                     <i class="bi bi-check-all"></i> 입력완료</button>
                 <button type="reset" class="btn btn-danger">
                     <i class="bi bi-arrow-repeat"></i> 다시입력</button></div>
         </div>
     </form>
 </main>
+{% endblock %}
+
+{% block script %}
+
+<script>
+    let joinbtn = document.querySelector('#joinbtn');
+    let joinfrm = document.joinfrm;
+        joinbtn.addEventListener('click', () => {
+        // 폼에 입력된 데이터를 초기화함
+        const formData = new FormData(joinfrm);
+        // 서버에 보내기 위해 JSON 객체로 변환
+        let jsondata = {};
+        formData.forEach(function (val, key){
+            jsondata[key] = val;
+        });
+
+        // ajax를 이용해서 서버로 전송하고 결과 받음
+        fetch('http://127.0.0.1:8000/join', {
+            method: 'POST',                         // 데이터 전송방식
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(jsondata)
+        })                                          // 전송할 데이터 형식
+            // .then((res) => res.json())              // 서버로부터 응답받음
+            // .then((data) => console.log(data))      // 서버 데이터 콘솔에 출력
+            .then((res) => res.text())
+            .then(data => {
+                if (parseInt(data) > 0 ) location.href = '/joinok'    // 회원가입 성공시
+                else location.href = '/error'               // 회원가입 실패시
+            })
+            .catch((err) => console.log(err));      // 오류발생시 콘솔에 출력
+    });
+</script>
+
 {% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block style %}
+    <style>
+    form { width: 365px; margin: 100px auto; }
+    form div { margin-bottom: 5px;}
+    form label { font-weight: bold; width: 110px; text-align: right; }
+    form button:first-child { margin-left: 135px }
+    </style>
+{% endblock %}
+
+{% block main %}
+<main>
+    <h2>회원가입 완료</h2>
+            <div><button type="button" class="btn btn-primary" id="loginbtn">
+            <i class="bi bi-check-all"></i>로그인</button></div>
+</main>
+{% endblock %}
+
+{% block script %}
+<script>
+    let loginbtn = document.querySelector('#loginbtn');
+    loginbtn.addEventListener('click', () => {
+        location.href = 'http://127.0.0.1:8000/login';
+    });
+</script>
+{% endblock %}
+
+

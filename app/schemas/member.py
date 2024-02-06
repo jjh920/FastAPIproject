@@ -14,7 +14,7 @@ class Member(BaseModel):
     class config:
         from_attributes = True
 
-class NewMemver(BaseModel):
+class NewMember(BaseModel):
     userid: str
     passwd: str
     name: str

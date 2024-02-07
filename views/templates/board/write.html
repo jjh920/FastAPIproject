@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block style %}
+<style>
+    form { width: 520px; margin: 100px auto }
+    form div { margin-bottom: 5px; }
+    form label { font-weight: bold; width: 110px; text-align: right;}
+    form button:first-child {margin-left: 145px}
+    .dragup { vertical-align: top }
+</style>
+{% endblock %}
+
+{% block main %}
+<main>
+    <h2>게시판 새글쓰기</h2>
+    <form name="boardfrm">
+        <div class="row">
+            <div class="col-auto"><label for="title" class="col-form-label">제목</label></div>
+            <div class="col-auto"><input type="text" name="title" id="title" class="form-control"></div>
+        </div>
+        <div class="row">
+            <div class="col-auto"><label for="userid" class="col-form-label">작성자</label></div>
+            <div class="col-auto"><input type="text" name="userid" id="userid" value="abc123" readonly class="form-control"></div>
+        </div>
+        <div class="row">
+            <div class="col-auto"><label for="contents" class="dragup" class="col-form-label">본문</label></div>
+            <div class="col-auto"><textarea name="contents" id="contents"
+                                            cols="45" rows="7" class="form-control"></textarea></div>
+        </div>
+        <div class="row">
+            <div class="col-auto"><label for="captcha" class="dragup" >자동작성방지</label></div>
+            <div class="col-auto"><img src="{{ url_for('static', path='/img/captcha.png') }}" id="captcha" alt="캡챠" ></div>
+        </div>
+        <div class="row">
+            <div class="col-auto">
+                <button type="button" class="btn btn-primary">
+                    <i class="bi bi-check-all"></i> 입력완료</button>
+                <button type="reset" class="btn btn-danger">
+                    <i class="bi bi-arrow-repeat"></i> 다시입력</button></div>
+        </div>
+    </form>
+</main>
+{% endblock %}

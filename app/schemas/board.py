@@ -11,6 +11,9 @@ class Board(BaseModel):
     views: int
     contents: str
 
+    class config:
+        from_attributes = True
+
 
 class NewBoard(BaseModel):
     title: str

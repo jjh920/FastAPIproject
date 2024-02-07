@@ -39,26 +39,14 @@
             <td colspan="3"><a href="/board/write" class="btn btn-dark text-white">글쓰기</a>
         </tr>
         <tr><th>번호</th><th>제목</th><th>작성자</th><th>작성일</th><th>조회수</th></tr>
-        <tr><td>1</td><td><a href="/board/view"> 시간은 금이라구, 친구! 진짜라구, 친구!, 사실이라구 친구!, 정말이라구, 친구!</a></td><td>joju</td><td>2024-01-22</td><td>987</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!, 너도 그렇게 생각하니 친구?</td><td>joju</td><td>2024-01-22</td><td>987</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td><td>joju</td><td>2024-01-22</td><td>987</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td><td>joju</td><td>2024-01-22</td><td>987</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td><td>joju</td><td>2024-01-22</td><td>987</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td><td>joju</td><td>2024-01-22</td><td>987</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td><td>joju</td><td>2024-01-22</td><td>987</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td><td>joju</td><td>2024-01-22</td><td>987</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td><td>joju</td><td>2024-01-22</td><td>987</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td><td>joju</td><td>2024-01-22</td><td>987</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td><td>joju</td><td>2024-01-22</td><td>987</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td><td>joju</td><td>2024-01-22</td><td>987</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td><td>joju</td><td>2024-01-22</td><td>987</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td><td>joju</td><td>2024-01-22</td><td>987</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td><td>joju</td><td>2024-01-22</td><td>987</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td><td>joju</td><td>2024-01-22</td><td>987</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td><td>joju</td><td>2024-01-22</td><td>987</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td><td>joju</td><td>2024-01-22</td><td>987</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td><td>joju</td><td>2024-01-22</td><td>987</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td><td>joju</td><td>2024-01-22</td><td>987</td></tr>
+
+        {% for bd in bdlist %}
+        <tr><td>{{ bd.bno }}</td>
+            <td><a href="/board/view">{{ bd.title }}</a></td>
+            <td>{{ bd.userid }}</td>
+            <td>{{ bd.regdate.strftime('%Y-%m-%d') }}</td>
+            <td>{{ bd.views }}</td></tr>
+        {% endfor %}
     </table>
     <ul class="pagination justify-content-center m-4">
         <li class="page-item disabled"><a class="page-link" href="#">이전</a></li>

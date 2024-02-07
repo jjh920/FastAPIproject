@@ -16,4 +16,4 @@ class Board(Base):
     userid = Column(String(18), nullable=False)
     regdate = Column(DateTime, default=datetime.now)
     views = Column(Integer, default=0)
-    contens = Column(Text, nullable=False)
+    contents = Column(Text, nullable=False)

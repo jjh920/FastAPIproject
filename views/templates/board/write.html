@@ -33,11 +33,42 @@
         </div>
         <div class="row">
             <div class="col-auto">
-                <button type="button" class="btn btn-primary">
+                <button type="button" class="btn btn-primary" id="writebtn">
                     <i class="bi bi-check-all"></i> 입력완료</button>
                 <button type="reset" class="btn btn-danger">
                     <i class="bi bi-arrow-repeat"></i> 다시입력</button></div>
         </div>
     </form>
 </main>
+{% endblock %}
+
+{% block script %}
+<script>
+    let writebtn = document.querySelector('#writebtn')
+    let boardfrm = document.boardfrm;
+    writebtn.addEventListener('click', () => {
+        const formData = new FormData(boardfrm);
+
+        let jsondata = {};
+        formData.forEach((val, key) => {
+            jsondata[key] = val;
+        });
+
+        fetch('http://127.0.0.1:8000/board/write', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(jsondata),
+            redirect: 'follow'      // 서버에서 전송한 상태코드, url에 따름
+        })
+            .then((res) => {
+                if (res.redirected) location.href = res.url;
+            })
+            .catch((err) => console.log(err));
+    })
+
+
+</script>
 {% endblock %}

@@ -15,7 +15,7 @@ board_router.mount('/static', StaticFiles(directory='views/static'), name='stati
 
 @board_router.get('/list')
 def list(req: Request):
-    bdlist = BoardService.selet_board()
+    bdlist = BoardService.select_board()
     return templates.TemplateResponse('board/list.html', {'request': req, 'bdlist': bdlist})
 
 
@@ -31,6 +31,8 @@ def writeok(bdto: NewBoard):
     return RedirectResponse(res_url, status_code=status.HTTP_302_FOUND)
 
 
-@board_router.get('/view', response_class=HTMLResponse)
-def view(req: Request):
-    return templates.TemplateResponse('board/view.html', {'request': req})
+@board_router.get('/view/{bno}', response_class=HTMLResponse)
+def view(req: Request, bno: str):
+
+    bd=BoardService.selectone_board(bno)[0]
+    return templates.TemplateResponse('board/view.html', {'request': req, 'bd': bd})

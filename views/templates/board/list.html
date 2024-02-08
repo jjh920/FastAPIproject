@@ -53,7 +53,7 @@
         {% if cpg == 1 %} <li class="page-item disabled">
         {% else %} <li class="page-item"> {% endif %}
             <a class="page-link" href="/board/list/{{ cpg - 1 }}">이전</a></li>
-        {% for idx in range(1, 10 + 1) %}
+        {% for idx in range(stpg, stpg + 10) %}
         <li class="page-item">
             <a class="page-link" href="/board/list/{{ idx }}">{{ idx }}</a></li>
         {% endfor %}

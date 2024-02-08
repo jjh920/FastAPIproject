@@ -35,4 +35,5 @@ def writeok(bdto: NewBoard):
 def view(req: Request, bno: str):
 
     bd=BoardService.selectone_board(bno)[0]
+    BoardService.update_count_board(bno)
     return templates.TemplateResponse('board/view.html', {'request': req, 'bd': bd})

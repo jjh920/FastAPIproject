@@ -49,18 +49,15 @@
         {% endfor %}
     </table>
     <ul class="pagination justify-content-center m-4">
-        <li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
-        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item"><a class="page-link" href="#">4</a></li>
-        <li class="page-item"><a class="page-link" href="#">5</a></li>
-        <li class="page-item"><a class="page-link" href="#">6</a></li>
-        <li class="page-item"><a class="page-link" href="#">7</a></li>
-        <li class="page-item"><a class="page-link" href="#">8</a></li>
-        <li class="page-item"><a class="page-link" href="#">9</a></li>
-        <li class="page-item"><a class="page-link" href="#">10</a></li>
-        <li class="page-item"><a class="page-link" href="#">다음</a></li>
+        <!-- 현재페이지가 1이라면 이전버튼 비활성       -->
+        {% if cpg == 1 %} <li class="page-item disabled">
+        {% else %} <li class="page-item"> {% endif %}
+            <a class="page-link" href="/board/list/{{ cpg - 1 }}">이전</a></li>
+        {% for idx in range(1, 10 + 1) %}
+        <li class="page-item">
+            <a class="page-link" href="/board/list/{{ idx }}">{{ idx }}</a></li>
+        {% endfor %}
+        <li class="page-item"><a class="page-link" href="/board/list/{{ cpg + 1 }}">다음</a></li>
     </ul>
 </main>
 {% endblock %}

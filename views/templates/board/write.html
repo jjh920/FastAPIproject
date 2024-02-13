@@ -8,6 +8,14 @@
     form button:first-child {margin-left: 145px}
     .dragup { vertical-align: top }
 </style>
+<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+        async defer>
+</script>
+<script type="text/javascript">
+    var onloadCallback = () => {
+        grecaptcha.render('captcha', { 'sitekey' : '' });
+    };
+</script>
 {% endblock %}
 
 {% block main %}
@@ -29,7 +37,7 @@
         </div>
         <div class="row">
             <div class="col-auto"><label for="captcha" class="dragup" >자동작성방지</label></div>
-            <div class="col-auto"><img src="{{ url_for('static', path='/img/captcha.png') }}" id="captcha" alt="캡챠" ></div>
+            <div class="col-auto"><div id="captcha" alt="캡챠" ></div></div>
         </div>
         <div class="row">
             <div class="col-auto">
@@ -47,12 +55,24 @@
     let writebtn = document.querySelector('#writebtn')
     let boardfrm = document.boardfrm;
     writebtn.addEventListener('click', () => {
+
+        //캡챠 체크 - 캡챠 응답토큰 생성 여부 확인
+        // console.log(grecaptcha.getResponse());
+        // alert('잠시 대기중...');
+        if (grecaptcha.getResponse() === '') {
+            alert('자동가입방지를 확인하세요!!');
+            return;
+        }
+
+
         const formData = new FormData(boardfrm);
 
         let jsondata = {};
         formData.forEach((val, key) => {
             jsondata[key] = val;
         });
+        //캡챠 응답토큰을 jsondata에 추가
+        jsondata['response'] = grecaptcha.getResponse();
 
         fetch('http://127.0.0.1:8000/board/write', {
             method: 'POST',

@@ -83,7 +83,29 @@
         let params = `/${ftype}/${fkey}/1`;
         let findurl = 'http://127.0.0.1:8000/board/list'+params;
 
-        location.href = findurl
+        location.href = findurl;
     });
+</script>
+<script>
+    // url의 상태에 따라 검색창 UI에 내용 채움
+    let findurl = location.pathname.split('/');
+    // console.log(findurl[3], findurl[4]);
+    if (findurl[4] !== undefined) {     // 검색어가 입력되었다면
+        let classname = 'bg-warning text-white'
+        // 검색어를 검색 UI에 자동삽입
+        document.querySelector('#fkey').value = decodeURI(findurl[4]);
+        document.querySelector('#fkey').className = `form-control ${classname}`;
+
+        // 검색유형을 select태그에 반영 : selectedIndex 이용
+        let ftype = document.querySelector('#ftype')
+        ftype.className = `form-control ${classname}`;
+        switch (findurl[3]) {
+            case 'title': ftype.selectedIndex = 0; break;
+            case 'contents': ftype.selectedIndex = 1; break;
+            case 'userid': ftype.selectedIndex = 2; break;
+            case 'titconts': ftype.selectedIndex = 3; break;
+            case 'comments': ftype.selectedIndex = 4; break;
+        }
+    }
 </script>
 {% endblock  %}

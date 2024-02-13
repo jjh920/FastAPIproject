@@ -62,7 +62,7 @@ def write(req: Request):
 def writeok(bdto: NewBoard):
     result = BoardService.insert_board(bdto)
     res_url = '/error'
-    if result.rowcount > 0: res_url = '/board/list'
+    if result.rowcount > 0: res_url = '/board/list/1'
     return RedirectResponse(res_url, status_code=status.HTTP_302_FOUND)
 
 

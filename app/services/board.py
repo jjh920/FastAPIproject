@@ -1,6 +1,7 @@
 from app.models.board import Board
 from app.dbfactory import Session
-from sqlalchemy import insert, select, update, func
+from sqlalchemy import insert, select, update, func, or_
+
 
 class BoardService():
     @staticmethod
@@ -37,24 +38,23 @@ class BoardService():
 
 
     @staticmethod
-    def find_select_board(ftype, fkey):
-        # stnum = (cpg - 1) * 25
-        stnum = 0
+    def find_select_board(ftype, fkey, cpg):
+        stnum = (cpg - 1) * 25
         with Session() as sess:
-            # cnt = sess. query(func.count(Board.bno)).scalar()   # 총 게시글 수
-
             stmt = select(Board.bno, Board.title, Board.userid, Board.regdate, Board.views)
 
             # 동적 쿼리 작성 - 조건에 다라 where절이 바뀜
             myfilter = Board.title.like(fkey)
             if ftype == 'userid': myfilter = Board.userid.like(fkey)
-            elif ftype == 'contents': myfilter = Board.contents.like(fkey)
+            elif ftype == 'contents': myfilter = or_(Board.title.like(fkey), Board.contents.like(fkey))
 
             stmt = stmt.filter(myfilter)\
                 .order_by(Board.bno.desc()).offset(stnum).limit(25)
             result = sess.execute(stmt)
 
-            return result
+            cnt = sess. query(func.count(Board.bno)).filter(myfilter).scalar()   # 총 게시글 수
+
+            return result, cnt
 
 
 

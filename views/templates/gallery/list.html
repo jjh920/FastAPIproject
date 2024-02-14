@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+
+{% block style %}
+<style>
+    table {table-layout: fixed; border-top-color: white !important;}
+    th, td {text-align: center; }
+    tr:first-child td { border: none; padding: 10px 0 }
+    tr:first-child td:last-child { text-align: right }
+    td:nth-child(2) { text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .pagination a:link { color: #0dcaf0 }
+</style>
+{% endblock %}
+
+{% block main %}
+<main>
+
+    <h2>갤러리 목록</h2>
+
+    <table class="table table-bordered w-75 container mt-5">
+        <colgroup><!-- table-fixed 속성이 설정된 경우, 각 컬럼에 대한 스타일 지정 -->
+            <col style="width: 10%">
+            <col style="">
+            <col style="width: 15%">
+            <col style="width: 15%">
+            <col style="width: 15%">
+        </colgroup>
+        <tr><td colspan="2" class="searchbox">
+            <div class="row">
+                <div class="col-auto"><select class="form-select" name="ftype" id="ftype">
+                    <option value="title">제목</option>
+                    <option value="contents">본문</option>
+                    <option value="userid">작성자</option>
+                    <option value="titconts">제목+본문</option>
+                    <option value="comments">댓글내용</option></select></div>
+
+                <div class="col-auto">
+                    <input type="text" name="fkey" id="fkey" class="form-control"></div>
+
+                <div class="col-auto"><button type="button" id="findbtn"
+                                              class="btn btn-dark text-white">검색하기</button></div>
+            </div></td>
+            <td colspan="3"><a href="/gallery/write" class="btn btn-dark text-white">글쓰기</a>
+        </tr>
+        <tr><th>번호</th><th>제목</th><th>작성자</th><th>작성일</th><th>조회수</th></tr>
+
+        {% for bd in bdlist %}
+        <tr><td>{{ bd.bno }}</td>
+            <td><a href="/board/view/{{ bd.bno }}">{{ bd.title }}</a></td>
+            <td>{{ bd.userid }}</td>
+            <td>{{ bd.regdate.strftime('%Y-%m-%d') }}</td>
+            <td>{{ bd.views }}</td></tr>
+        {% endfor %}
+    </table>
+    <ul class="pagination justify-content-center m-4">
+        <!-- 현재페이지가 1이라면 이전버튼 비활성       -->
+        {% if cpg == 1 %} <li class="page-item disabled">
+        {% else %} <li class="page-item"> {% endif %}
+            <a class="page-link" href="{{ baseurl }} {{ cpg - 1 }}">이전</a></li>
+        {% for idx in range(stpg, stpg + 10) %}
+
+            {% if idx <= allpage %}  <!--  idx 가 allpage보다 같거나 작으면 페이지네이션 출력 -->
+                {% if cpg == idx %} <li class="page-item disabled">
+                {% else %} <li class="page-item"> {% endif %}
+                <a class="page-link" href="{{ baseurl }}{{ idx }}">{{ idx }}</a></li>
+            {% endif %}
+        {% endfor %}
+
+        <!-- 현재페이지가 마지막페이지라면 다음버튼 비활성       -->
+        {% if cpg == allpage %} <li class="page-item disabled">
+        {% else %} <li class="page-item"> {% endif %}
+        <a class="page-link" href="{{ baseurl }}{{ cpg + 1 }}">다음</a></li>
+    </ul>
+</main>
+{% endblock %}
+
+{% block script %}
+<script>
+    let findbtn = document.querySelector('#findbtn');
+    findbtn.addEventListener('click', () => {
+        let ftype = document.querySelector('#ftype').value;
+        let fkey = document.querySelector('#fkey').value;
+
+        let params = `/${ftype}/${fkey}/1`;
+        let findurl = 'http://127.0.0.1:8000/board/list'+params;
+
+        location.href = findurl;
+    });
+</script>
+<script>
+    // url의 상태에 따라 검색창 UI에 내용 채움
+    let findurl = location.pathname.split('/');
+    // console.log(findurl[3], findurl[4]);
+    if (findurl[4] !== undefined) {     // 검색어가 입력되었다면
+        let classname = 'bg-secondary text-white'
+        // 검색어를 검색 UI에 자동삽입
+        document.querySelector('#fkey').value = decodeURI(findurl[4]);
+        document.querySelector('#fkey').className = `form-control ${classname}`;
+
+        // 검색유형을 select태그에 반영 : selectedIndex 이용
+        let ftype = document.querySelector('#ftype')
+        ftype.className = `form-control ${classname}`;
+        switch (findurl[3]) {
+            case 'title': ftype.selectedIndex = 0; break;
+            case 'contents': ftype.selectedIndex = 1; break;
+            case 'userid': ftype.selectedIndex = 2; break;
+            case 'titconts': ftype.selectedIndex = 3; break;
+            case 'comments': ftype.selectedIndex = 4; break;
+        }
+    }
+</script>
+{% endblock  %}

@@ -5,6 +5,11 @@
     <div class="text-center">
         <img src="{{ url_for('static', path='/img/indexjoju.jpg') }}"
              alt="도라에몽">
+        <div>
+            <a href="{{ url_for('static', path='/main.png') }}">이미지</a>
+            <a href="{{ url_for('static', path='/doc.zip') }}">압축파일</a>
+            <a href="{{ url_for('static', path='/hello.js') }}">자바스크립트</a>
+        </div>
     </div>
 </main>
 {% endblock %}

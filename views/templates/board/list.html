@@ -37,7 +37,7 @@
                     <input type="text" name="fkey" id="fkey" class="form-control"></div>
 
                 <div class="col-auto"><button type="button" id="findbtn"
-                                              class="btn btn-success">검색하기</button></div>
+                                              class="btn btn-dark text-white">검색하기</button></div>
             </div></td>
             <td colspan="3"><a href="/board/write" class="btn btn-dark text-white">글쓰기</a>
         </tr>
@@ -91,7 +91,7 @@
     let findurl = location.pathname.split('/');
     // console.log(findurl[3], findurl[4]);
     if (findurl[4] !== undefined) {     // 검색어가 입력되었다면
-        let classname = 'bg-warning text-white'
+        let classname = 'bg-secondary text-white'
         // 검색어를 검색 UI에 자동삽입
         document.querySelector('#fkey').value = decodeURI(findurl[4]);
         document.querySelector('#fkey').className = `form-control ${classname}`;

@@ -58,11 +58,15 @@ def find(req: Request, ftype: str, fkey: str, cpg: int):
 def write(req: Request):
     return templates.TemplateResponse('board/write.html', {'request': req})
 
+
 @board_router.post('/write')
 def writeok(bdto: NewBoard):
-    result = BoardService.insert_board(bdto)
-    res_url = '/error'
-    if result.rowcount > 0: res_url = '/board/list/1'
+    res_url = '/captcha_error'
+    if BoardService.check_captcha(bdto):    # captcha 체크가 true 라면
+        result = BoardService.insert_board(bdto)
+        res_url = '/write_error'
+        if result.rowcount > 0: res_url = '/board/list/1'
+
     return RedirectResponse(res_url, status_code=status.HTTP_302_FOUND)
 
 

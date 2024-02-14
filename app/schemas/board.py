@@ -11,7 +11,7 @@ class Board(BaseModel):
     views: int
     contents: str
 
-    class config:
+    class Config:
         from_attributes = True
 
 
@@ -19,3 +19,4 @@ class NewBoard(BaseModel):
     title: str
     userid: str
     contents: str
+    response: str

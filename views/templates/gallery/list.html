@@ -16,14 +16,8 @@
 
     <h2>갤러리 목록</h2>
 
-    <table class="table table-bordered w-75 container mt-5">
-        <colgroup><!-- table-fixed 속성이 설정된 경우, 각 컬럼에 대한 스타일 지정 -->
-            <col style="width: 10%">
-            <col style="">
-            <col style="width: 15%">
-            <col style="width: 15%">
-            <col style="width: 15%">
-        </colgroup>
+    <table class="table table-bordered w-70 container mt-5 ">
+
         <tr><td colspan="2" class="searchbox">
             <div class="row">
                 <div class="col-auto"><select class="form-select" name="ftype" id="ftype">
@@ -39,18 +33,28 @@
                 <div class="col-auto"><button type="button" id="findbtn"
                                               class="btn btn-dark text-white">검색하기</button></div>
             </div></td>
+
             <td colspan="3"><a href="/gallery/write" class="btn btn-dark text-white">글쓰기</a>
         </tr>
-        <tr><th>번호</th><th>제목</th><th>작성자</th><th>작성일</th><th>조회수</th></tr>
-
-        {% for bd in bdlist %}
-        <tr><td>{{ bd.bno }}</td>
-            <td><a href="/board/view/{{ bd.bno }}">{{ bd.title }}</a></td>
-            <td>{{ bd.userid }}</td>
-            <td>{{ bd.regdate.strftime('%Y-%m-%d') }}</td>
-            <td>{{ bd.views }}</td></tr>
-        {% endfor %}
     </table>
+
+    <div class="row justify-content-center">
+        {% for idx in range(1, 25) %}
+        <div class="col-10 card m-2" style="width: 18rem">
+            <img src="http://localhost/cdn/main.png"
+            class="card-img-top mt-2" alt="..."> <!-- 이미지 -->
+            <div class="card-body">
+                <h5 class="card-title">갤러리 제목</h5>
+                <div><span>작성자</span>
+                    <span>2024-02-15</span></div>
+                <div>
+                    <span><i class="bi bi-eye">1234</i></span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div><!-- 갤러리 이미지 리스트 -->
+
     <ul class="pagination justify-content-center m-4">
         <!-- 현재페이지가 1이라면 이전버튼 비활성       -->
         {% if cpg == 1 %} <li class="page-item disabled">

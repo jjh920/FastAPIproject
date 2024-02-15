@@ -3,7 +3,7 @@ from app.models.board import Board
 from app.dbfactory import Session
 from sqlalchemy import insert, select, update, func, or_
 import requests
-from app.models.gallery import Gallery
+from app.models.gallery import Gallery, GalAttach
 from datetime import datetime
 
 # 이미지 파일 저장 경로 설정
@@ -24,6 +24,13 @@ class GalleryService():
         data = GalleryService.gallery_convert(gdto)
         with Session() as sess:
             stmt = insert(Gallery).values(data)
+            result = sess.execute(stmt)
+            sess.commit()
+
+            data = {'fname': fname, 'fsize': fsize,
+                    'gno': result.inserted_primary_key[0]}
+            print(result.inserted_primary_key)
+            stmt = insert(GalAttach).values(data)
             result = sess.execute(stmt)
             sess.commit()
 

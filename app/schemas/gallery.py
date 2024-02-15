@@ -16,6 +16,12 @@ class Gallery(BaseModel):
 
 
 
+class NewGallery(BaseModel):
+    title: str
+    userid: str
+    contents: str
+
+
 
 class GalAttach(BaseModel):
     gano: int

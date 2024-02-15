@@ -41,8 +41,9 @@
     <div class="row justify-content-center">
         {% for gal in galist %}
         <div class="col-10 card m-2" style="width: 18rem">
+            <a href="/gallery/view/{{ gal.gno }}">
             <img src="http://localhost/cdn/{{ gal.fname }}"
-            class="card-img-top mt-2" alt="..."> <!-- 이미지 -->
+            class="card-img-top mt-2" alt="..."></a> <!-- 이미지 -->
             <div class="card-body">
                 <h5 class="card-title">{{ gal.title }}</h5>
                 <div><span>{{ gal.userid }}</span>

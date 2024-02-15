@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block style %}
+<style>
+    #view div{ margin-bottom: 5px; }
+    #view label {width: 110px; text-align: right;
+        font-weight: bold;margin-right: 15px }
+    #cnts {display: inline-block; width: 450px;
+        height: 450px; border: 1px solid red }
+    .dragup {vertical-align: top}
+    #view > div:last-child { text-align: right; margin-right: 10px; }
+</style>
+{% endblock %}
+
+{% block main %}
+<main>
+    <h2>게시판 본문보기</h2>
+    <div id="view" class="w-50 container">
+        <div class="row">
+            <div class="col-auto"><label>제목</label></div>
+            <div class="col-auto"><span>{{ g.title }}</span></div>
+        </div>
+        <div class="row">
+            <div class="col-auto"><label>작성자</label></div>
+            <div class="col-auto"><span>{{ g.userid }}</span></div>
+        </div>
+        <div class="row">
+            <div class="col-auto"><label>작성일</label></div>
+            <div class="col-auto"><span> {{ g.regdate.strftime('%Y-%m-%d %H:%M:%S')}} ({{g.views}})</span></div>
+        </div>
+        <div class="row">
+            <div class="col-auto"><label class="dragup">본문</label></div>
+            <div class="col-auto">
+                <span id="cnts"><img src="http://localhost/cdn/{{ ga.fname }}"
+                     class="img-fluid"><br>
+                    {{ g.contents }}</span>
+            </div>
+        </div>
+            <div class="row">
+            <div>
+                <button type="button" class="btn btn-success">
+                    <i class="bi bi-list"></i> 목록으로</button>
+                <button type="button" class="btn btn-warning">
+                    <i class="bi bi-pencil-square"></i> 수정하기</button>
+                <button type="button" class="btn btn-danger">
+                    <i class="bi bi-x-circle"></i> 삭제하기</button>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

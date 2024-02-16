@@ -5,10 +5,10 @@
     <h2>회원정보</h2>
     <div class="container w-25">
         <table class="table table-bordered mt-5">
-            <tr><th>아이디</th><td>abc123</td></tr>
-            <tr><th>이름</th><td>987xyz</td></tr>
-            <tr><th>이메일</th><td>abc123@987xyz.co.kr</td></tr>
-            <tr><th>가입일</th><td>2024.01.22 12:23:34</td></tr>
+            <tr><th>아이디</th><td>{{ my.userid }}</td></tr>
+            <tr><th>이름</th><td>{{ my.name }}</td></tr>
+            <tr><th>이메일</th><td>{{ my.email }}</td></tr>
+            <tr><th>가입일</th><td>{{ my.regdate.strftime('%Y-%m-%d %H:%M:%S') }}</td></tr>
         </table>
     </div>
 </main>

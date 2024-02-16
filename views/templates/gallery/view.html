@@ -40,10 +40,12 @@
             <div>
                 <button type="button" class="btn btn-success">
                     <i class="bi bi-list"></i> 목록으로</button>
+            {% if 'm' in request.session %}
                 <button type="button" class="btn btn-warning">
                     <i class="bi bi-pencil-square"></i> 수정하기</button>
                 <button type="button" class="btn btn-danger">
                     <i class="bi bi-x-circle"></i> 삭제하기</button>
+            {% endif %}
             </div>
         </div>
     </div>

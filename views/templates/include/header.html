@@ -2,7 +2,13 @@
 <nav>
     <ul class="list-inline row text-center justify-content-evenly mt-5">
         <li class="col-2"><a href="/">Home</a></li>
-        <li class="col-2"><a href="/join">회원가입</a></li>
+
+        {% if 'm' in request.session %}
+            <li class="col-2"><a href="#">회원가입</a></li>
+        {% else %}
+            <li class="col-2"><a href="/join">회원가입</a></li>
+        {% endif %}
+
 
         {% if 'm' in request.session %}
             <li class="col-2"><a href="/logout">로그아웃</a></li>

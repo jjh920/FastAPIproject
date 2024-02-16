@@ -35,8 +35,10 @@
         </div>
 
         <div class="col-4 text-end ms-4">
+            {% if 'm' in request.session %}
             <a href="/gallery/write" class="btn btn-dark text-white"
                style="margin-right: -10px;">글쓰기</a>
+            {% endif %}
         </div>
     </div>
 

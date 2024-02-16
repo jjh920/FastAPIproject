@@ -26,9 +26,21 @@
             <div class="col-auto"><input type="checkbox" name="r" value="m" class="form-check-input"> 로그인 상태 유지</div>
         </div>
         <div class="col-auto">
-            <div><button type="button" class="btn btn-primary">
+            <div><button type="button" class="btn btn-primary" id="loginbtn">
                 <i class="bi bi-box-arrow-in-right"></i> 로그인</button></div>
         </div>
     </form>
 </main>
+{% endblock %}
+
+{% block script %}
+<script>
+    let loginbtn = document.querySelector('#loginbtn');
+    let loginfrm = document.loginfrm;
+
+    loginbtn.addEventListener('click', () => {
+        loginfrm.method = 'post';
+        loginfrm.submit();
+    });
+</script>
 {% endblock %}

@@ -7,7 +7,8 @@ from app.models.gallery import Gallery, GalAttach
 from datetime import datetime
 
 # 이미지 파일 저장 경로 설정
-UPLOAD_DIR = r'C:\Java\nginx-1.25.3\html\cdn'
+# UPLOAD_DIR = r'C:\Java\nginx-1.25.3\html\cdn'
+UPLOAD_DIR = r'/usr/share/nginx/html/cdn'
 
 class GalleryService():
     @staticmethod

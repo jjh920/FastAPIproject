@@ -81,7 +81,7 @@
         let fkey = document.querySelector('#fkey').value;
 
         let params = `/${ftype}/${fkey}/1`;
-        let findurl = 'http://127.0.0.1:8000/board/list'+params;
+        let findurl = '/board/list'+params;
 
         location.href = findurl;
     });

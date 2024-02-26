@@ -46,7 +46,7 @@
         {% for gal in galist %}
         <div class="col-10 card m-1" style="width: 18rem">
             <a href="/gallery/view/{{ gal.gno }}">
-            <img src="http://localhost/cdn/{{ gal.fname }}"
+            <img src="/cdn/{{ gal.fname }}"
             class="card-img-top mt-2" alt="..."></a> <!-- 이미지 -->
             <div class="card-body">
                 <h5 class="card-title">{{ gal.title }}</h5>
@@ -90,7 +90,7 @@
         let fkey = document.querySelector('#fkey').value;
 
         let params = `/${ftype}/${fkey}/1`;
-        let findurl = 'http://127.0.0.1:8000/board/list'+params;
+        let findurl = '/gallery/list'+params;
 
         location.href = findurl;
     });

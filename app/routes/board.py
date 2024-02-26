@@ -12,7 +12,7 @@ from math import ceil
 board_router = APIRouter()
 
 templates = Jinja2Templates(directory='views/templates')
-board_router.mount('/static', StaticFiles(directory='views/static'), name='static')
+# board_router.mount('/static', StaticFiles(directory='views/static'), name='static')
 
 # 페이징 알고리즘
 # 페이지당 게시글 수 : 25

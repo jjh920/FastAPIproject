@@ -23,7 +23,7 @@
         </div>
         <div class="row">
             <div class="col-auto"><label for="repwd" class="col-form-label">비밀번호 확인</label></div>
-            <div class="col-auto"><input type="text" name="repwd" id="repwd" class="form-control"></div>
+            <div class="col-auto"><input type="password" name="repwd" id="repwd" class="form-control"></div>
         </div>
         <div class="row">
             <div class="col-auto"><label for="name" class="col-form-label">이름</label></div>
@@ -59,7 +59,7 @@
         });
 
         // ajax를 이용해서 서버로 전송하고 결과 받음
-        fetch('http://127.0.0.1:8000/join', {
+        fetch('/join', {
             method: 'POST',                         // 데이터 전송방식
             headers: {
                 'Accept': 'application/json',
